@@ -16,13 +16,13 @@ namespace thriftEcommerce.Controllers
         }
 
         // GET: CategoryController/Details/5
-        public ActionResult Show(int id)
+        public IActionResult Show(int id)
         {
             return View();
         }
 
         // GET: CategoryController/Create
-        public ActionResult Add()
+        public IActionResult Add()
         {
             return View();
         }
@@ -30,20 +30,25 @@ namespace thriftEcommerce.Controllers
         // POST: CategoryController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public IActionResult Create(IFormCollection collection)
         {
-            try
-            {
-                return RedirectToAction(nameof(Index));
+            if(ModelState.IsValid){
+                try
+                {
+                     return RedirectToAction(nameof(Index));
+                }
+                catch
+                {
+                      return View();
+                }
             }
-            catch
-            {
-                return View();
+            else{
+                return Content("Model Validation falied");
             }
         }
 
         // GET: CategoryController/Edit/5
-        public ActionResult Edit(int id)
+        public IActionResult Edit(int id)
         {
             return View();
         }
@@ -51,7 +56,7 @@ namespace thriftEcommerce.Controllers
         // POST: CategoryController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public IActionResult Edit(int id, IFormCollection collection)
         {
             try
             {
@@ -64,7 +69,7 @@ namespace thriftEcommerce.Controllers
         }
 
         // GET: CategoryController/Delete/5
-        public ActionResult Delete(int id)
+        public IActionResult Delete(int id)
         {
             return View();
         }
@@ -72,7 +77,7 @@ namespace thriftEcommerce.Controllers
         // POST: CategoryController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public IActionResult Delete(int id, IFormCollection collection)
         {
             try
             {
